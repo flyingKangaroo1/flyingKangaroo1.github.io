@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+<div id="main" role="main">
+  <div class="home-wrapper">
+    {{ content }}
+  </div>
+</div>
+
+<script>
+(function () {
+  var sections = document.querySelectorAll('.home-section[id]');
+  var navLinks = document.querySelectorAll('.greedy-nav .visible-links .masthead__menu-item:not(.persist) a');
+
+  if (!sections.length || !navLinks.length) return;
+
+  // Build map: section id -> nav <li>
+  var linkMap = {};
+  navLinks.forEach(function (a) {
+    var hash = a.getAttribute('href').split('#')[1];
+    if (hash) linkMap[hash] = a.parentElement;
+  });
+
+  function setActive(id) {
+    Object.values(linkMap).forEach(function (li) { li.classList.remove('selected'); });
+    if (id && linkMap[id]) linkMap[id].classList.add('selected');
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    // Pick the topmost visible section
+    var visible = entries
+      .filter(function (e) { return e.isIntersecting; })
+      .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+    if (visible.length) setActive(visible[0].target.id);
+  }, {
+    rootMargin: '-80px 0px -60% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(function (s) { observer.observe(s); });
+})();
+</script>

@@ -1,0 +1,57 @@
+{% include base_path %}
+
+{% if post.id %}
+  {% assign full_title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign full_title = post.title %}
+{% endif %}
+
+{% assign headline = post.name | default: full_title %}
+{% assign subtitle = "" %}
+{% if post.name %}
+  {% assign subtitle = full_title %}
+{% endif %}
+
+{% assign badge = post.venue_short %}
+{% if badge == blank %}
+  {% assign badge = post.date | date: "%Y" %}
+{% endif %}
+
+{% assign paper_link = post.paperurl %}
+
+<article class="pub-card">
+  <div class="pub-card__media">
+    {% if post.header.teaser %}
+      {% include card-media.html teaser=post.header.teaser alt=headline %}
+    {% else %}
+      <i class="{{ post.icon | default: 'fas fa-file-lines' }}" aria-hidden="true"></i>
+    {% endif %}
+    {% if post.award %}
+      <span class="pub-card__award"><i class="fas fa-trophy" aria-hidden="true"></i> {{ post.award }}</span>
+    {% endif %}
+  </div>
+  <div class="pub-card__body">
+    <div class="pub-card__header">
+      <h3 class="pub-card__title">{{ headline }}</h3>
+      {% if badge != blank %}<span class="pub-card__badge">{{ badge }}</span>{% endif %}
+    </div>
+
+    {% if subtitle != blank %}<p class="pub-card__subtitle">{{ subtitle }}</p>{% endif %}
+    {% if post.authors %}<p class="pub-card__authors">{{ post.authors | replace: "Suk Min Hwang", "<strong>Suk Min Hwang</strong>" }}</p>{% endif %}
+    {% if post.excerpt %}<div class="pub-card__desc">{{ post.excerpt | markdownify }}</div>{% endif %}
+
+    {% if post.tags %}
+      <div class="pub-card__tags">
+        {% for tag in post.tags %}<span class="pub-card__tag">{{ tag }}</span>{% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="pub-card__links">
+      {% if paper_link != blank %}<a href="{{ paper_link }}"><i class="fas fa-file-lines" aria-hidden="true"></i> Paper</a>{% endif %}
+      {% if post.arxiv != blank %}<a href="{{ post.arxiv }}"><i class="ai ai-arxiv" aria-hidden="true"></i> arXiv</a>{% endif %}
+      {% if post.github != blank %}<a href="{{ post.github }}"><i class="fab fa-github" aria-hidden="true"></i> Code</a>{% endif %}
+      {% if post.projectpage != blank %}<a href="{{ post.projectpage }}"><i class="fas fa-globe" aria-hidden="true"></i> Website</a>{% endif %}
+      {% if post.video != blank %}<a href="{{ post.video }}"><i class="fas fa-play" aria-hidden="true"></i> Video</a>{% endif %}
+    </div>
+  </div>
+</article>

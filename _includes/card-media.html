@@ -1,0 +1,53 @@
+{% include base_path %}
+{%- assign teaser = include.teaser -%}
+{%- assign alt = include.alt -%}
+{%- if teaser contains "://" -%}
+  {%- assign media_src = teaser -%}
+{%- else -%}
+  {%- assign media_src = teaser | prepend: '/images/' | prepend: base_path -%}
+{%- endif -%}
+{%- assign teaser_ext = teaser | split: "." | last | downcase -%}
+{%- if teaser_ext == "mp4" or teaser_ext == "webm" or teaser_ext == "mov" or teaser_ext == "ogv" -%}
+  {%- comment -%} Look for a same-named image next to the video to use as a poster {%- endcomment -%}
+  {%- assign teaser_base = teaser | split: "." | pop | join: "." -%}
+  {%- assign poster_src = "" -%}
+  {%- for sf in site.static_files -%}
+    {%- assign sf_rel = sf.path | remove_first: "/images/" | split: "." | pop | join: "." -%}
+    {%- assign sf_ext = sf.extname | downcase | remove_first: "." -%}
+    {%- if sf_rel == teaser_base -%}
+      {%- if sf_ext == "png" or sf_ext == "jpg" or sf_ext == "jpeg" or sf_ext == "webp" -%}
+        {%- assign poster_src = sf.path | prepend: base_path -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  <video src="{{ media_src }}"{% if poster_src != "" %} poster="{{ poster_src }}"{% endif %} autoplay loop muted playsinline preload="auto" aria-label="{{ alt }}"></video>
+  <script>
+  (function () {
+    if (window.__cardVideoInit) return;
+    window.__cardVideoInit = true;
+    function boot() {
+      document.querySelectorAll('.pub-card__media video').forEach(function (v) {
+        v.muted = true;
+        v.setAttribute('muted', '');
+        var kick = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+        v.load();
+        kick();
+        v.addEventListener('loadeddata', kick, { once: true });
+        v.addEventListener('canplay', kick, { once: true });
+        var tries = 0;
+        var iv = setInterval(function () {
+          if (!v.paused || tries++ > 20) { clearInterval(iv); return; }
+          kick();
+        }, 1000);
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
+  })();
+  </script>
+{%- else -%}
+  <img src="{{ media_src }}" alt="{{ alt }}" loading="lazy">
+{%- endif -%}

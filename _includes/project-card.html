@@ -1,0 +1,55 @@
+{% include base_path %}
+
+{% assign has_specific = false %}
+{% if post.paperurl != blank or post.github != blank or post.website != blank or post.video != blank %}
+  {% assign has_specific = true %}
+{% endif %}
+
+{% assign headline = post.name | default: post.title %}
+{% assign subtitle = "" %}
+{% if post.name %}
+  {% assign subtitle = post.title %}
+{% endif %}
+
+<article class="pub-card">
+  <div class="pub-card__media">
+    {% if post.header.teaser %}
+      {% include card-media.html teaser=post.header.teaser alt=headline %}
+    {% else %}
+      <i class="{{ post.icon | default: 'fas fa-diagram-project' }}" aria-hidden="true"></i>
+    {% endif %}
+    {% if post.award %}
+      <span class="pub-card__award"><i class="fas fa-trophy" aria-hidden="true"></i> {{ post.award }}</span>
+    {% endif %}
+  </div>
+  <div class="pub-card__body">
+    <div class="pub-card__header">
+      <h3 class="pub-card__title">{{ headline }}</h3>
+      {% if post.badge %}<span class="pub-card__badge">{{ post.badge }}</span>{% endif %}
+    </div>
+
+    {% if subtitle != blank %}<p class="pub-card__subtitle">{{ subtitle }}</p>{% endif %}
+    {% if post.excerpt %}<div class="pub-card__desc">{{ post.excerpt | markdownify }}</div>{% endif %}
+
+    {% if post.tags %}
+      <div class="pub-card__tags">
+        {% for tag in post.tags %}<span class="pub-card__tag">{{ tag }}</span>{% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="pub-card__links">
+      {% if post.paperurl != blank %}<a href="{{ post.paperurl }}"><i class="fas fa-file-lines" aria-hidden="true"></i> Paper</a>{% endif %}
+      {% if post.github != blank %}<a href="{{ post.github }}"><i class="fab fa-github" aria-hidden="true"></i> Code</a>{% endif %}
+      {% if post.website != blank %}<a href="{{ post.website }}"><i class="fas fa-globe" aria-hidden="true"></i> Website</a>{% endif %}
+      {% if post.video != blank %}<a href="{{ post.video }}"><i class="fas fa-play" aria-hidden="true"></i> Video</a>{% endif %}
+      {% unless has_specific %}
+        {% if post.link != blank %}
+          {% assign icon_class = "fas fa-arrow-up-right-from-square" %}
+          {% if post.link_label contains "Video" %}{% assign icon_class = "fas fa-play" %}{% endif %}
+          {% if post.link_label contains "GitHub" %}{% assign icon_class = "fab fa-github" %}{% endif %}
+          <a href="{{ post.link }}"><i class="{{ icon_class }}" aria-hidden="true"></i> {{ post.link_label | default: "Link" }}</a>
+        {% endif %}
+      {% endunless %}
+    </div>
+  </div>
+</article>

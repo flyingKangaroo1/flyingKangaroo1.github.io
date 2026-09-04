@@ -1,0 +1,17 @@
+# The following is the order of the links in the header of the website.
+
+main:
+  - title: "Experience"
+    url: /#experience
+
+  - title: "Publications"
+    url: /#publications
+
+  - title: "Projects"
+    url: /#projects
+
+  - title: "Honors & Awards"
+    url: /#honors
+
+  - title: "Teaching & Service"
+    url: /#teaching
