@@ -13,7 +13,7 @@ redirect_from:
   <div class="home-hero__bio">
     <h1>Raphael (Suk Min) Hwang</h1>
     <p>
-      I am an undergraduate research intern at the Laboratory of Artificial Intelligence and Robotics at Sungkyunkwan University. My research focuses on 3D mapping and SLAM, particularly using Gaussian Splatting to represent dynamic environments. Currently, I'm working on continual learning methods that let these representations incorporate new observations over time without catastrophic forgetting.
+      I am an undergraduate research intern at the Laboratory of Artificial Intelligence and Robotics at Sungkyunkwan University. My research focuses on 3D mapping and SLAM, particularly using Gaussian Splatting to represent dynamic environments. Currently, I'm working on continual learning methods that allow these representations to incorporate new observations over time without catastrophic forgetting.
     </p>
     <div class="home-hero__links">
       <a href="mailto:raph03@g.skku.edu"><i class="fas fa-envelope"></i> raph03@g.skku.edu</a>
@@ -30,7 +30,7 @@ redirect_from:
 ## Education
 
 **Sungkyunkwan University** · Suwon, South Korea · Expected March 2027  
-B.Eng. in Mechanical Engineering & Computer Science and Engineering
+B.Eng. in Mechanical Engineering & Computer Science and Engineering · GPA: 4.41/4.50
 
 </section>
 
@@ -83,8 +83,8 @@ B.Eng. in Mechanical Engineering & Computer Science and Engineering
 
 - **National Science & Technology Scholarship** (2025–2026), Ministry of Science and ICT - awarded to the
   top-ranked student in major during the first two years of study, full-tuition scholarship through graduation
+- **SKKU Chung Yong-ji Scholarship** (2026) - awarded to one student across the College of Engineering for leadership, community engagement, and research initiative
 - **Merit Scholarship** (2021–2025) - awarded to the top 4% of candidates
-- **SKKU Chung Yong-ji Scholarship** (2026)
 - **Entegris Foundation Scholarship** (2022)
 
 </section>
@@ -95,7 +95,7 @@ B.Eng. in Mechanical Engineering & Computer Science and Engineering
 
 ## Teaching & Service
 
-- **Teaching Assistant**, C Programming - DASF004
+- **Teaching Assistant**, C Programming, SKKU
 - **Instructor**, Republic of Korea Air Force MAICON Military AI Contest (2025) - trained officers and cadets on autonomous driving systems
 - **Exhibitor**, SOLiDVUE at CES 2025 - demonstrated LiDAR sensor technology
 - **SG Maple** (Global Mentoring & Assisting Exchange Students), SKKU
