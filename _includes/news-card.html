@@ -1,0 +1,14 @@
+{% include base_path %}
+
+<article class="pub-card pub-card--news">
+  <div class="pub-card__body">
+    <div class="pub-card__header">
+      <h3 class="pub-card__title">{{ post.title }}</h3>
+      {% if post.date %}<span class="pub-card__badge">{{ post.date | date: "%b %Y" }}</span>{% endif %}
+    </div>
+
+    <div class="pub-card__links">
+      <a href="{{ base_path }}{{ post.url }}"><i class="fas fa-arrow-right" aria-hidden="true"></i> Read more</a>
+    </div>
+  </div>
+</article>

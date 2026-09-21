@@ -1,0 +1,64 @@
+{% include base_path %}
+
+{% if include.id %}
+  {% assign tiles = page.[include.id] %}
+{% else %}
+  {% assign tiles = page.gallery %}
+{% endif %}
+
+<div class="photo-tiles">
+  {% for img in tiles %}
+    {% if img.image_path contains "://" %}
+      {% assign tile_src = img.image_path %}
+    {% else %}
+      {% assign tile_src = img.image_path | prepend: "/images/" | prepend: base_path %}
+    {% endif %}
+    <a class="photo-tiles__item" href="{{ tile_src }}" data-photo-tile>
+      <img src="{{ tile_src }}" alt="{{ img.alt }}" loading="lazy">
+    </a>
+  {% endfor %}
+</div>
+
+<div class="photo-tiles-lightbox" data-photo-tiles-lightbox>
+  <img src="" alt="">
+</div>
+
+<script>
+(function () {
+  if (window.__photoTilesInit) return;
+  window.__photoTilesInit = true;
+
+  function boot() {
+    var lightbox = document.querySelector('[data-photo-tiles-lightbox]');
+    if (!lightbox) return;
+    var lightboxImg = lightbox.querySelector('img');
+
+    document.querySelectorAll('[data-photo-tile]').forEach(function (tile) {
+      tile.addEventListener('click', function (e) {
+        e.preventDefault();
+        lightboxImg.src = tile.getAttribute('href');
+        lightboxImg.alt = tile.querySelector('img').alt;
+        lightbox.classList.add('is-open');
+      });
+    });
+
+    lightbox.addEventListener('click', function () {
+      lightbox.classList.remove('is-open');
+      lightboxImg.src = '';
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        lightbox.classList.remove('is-open');
+        lightboxImg.src = '';
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>

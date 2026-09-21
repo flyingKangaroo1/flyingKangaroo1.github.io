@@ -18,9 +18,22 @@ redirect_from:
     <div class="home-hero__links">
       <a href="mailto:raph03@g.skku.edu"><i class="fas fa-envelope"></i> raph03@g.skku.edu</a>
       <a href="https://linkedin.com/in/raphaelhwang"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://scholar.google.com/citations?hl=en&user=qvky8iQAAAAJ"><i class="ai ai-google-scholar"></i> Google Scholar</a>
       <a href="https://github.com/flyingKangaroo1"><i class="fab fa-github"></i> GitHub</a>
     </div>
   </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="home-section" id="news">
+<h2>News</h2>
+
+{% assign sorted_news = site.news | sort: 'date' | reverse %}
+{% for post in sorted_news %}
+{% include news-card.html %}
+{% endfor %}
+
 </section>
 
 <hr class="section-divider">
@@ -42,12 +55,13 @@ B.Eng. in Mechanical Engineering & Computer Science and Engineering · GPA: 4.41
 
 **Research Intern** · LAIR Lab, Sungkyunkwan University · 2025 – Present
 
-- Co-developed a range-adaptive scale initialization method for LiDAR Gaussian Splatting SLAM, scaling each Gaussian proportional to its range to compensate for LiDAR's fixed angular resolution, improving surface coverage at far range on sparse scan sequences
-- Implemented a surface-reconstruction evaluation pipeline and benchmarked state-of-the-art SLAM methods (PIN-SLAM, Splat-LOAM, Voxblox, N3-Mapping) on real-world LiDAR datasets (Newer College, Oxford Spires)
+- Co-developed range-adaptive Gaussian scale initialization, scaling Gaussian sizes with LiDAR range to improve far-range surface coverage (Keble College F-score: 51.58% → 64.02%)
+- Implemented the surface-reconstruction evaluation pipeline and produced the quantitative comparisons, benchmarking state-of-the-art LiDAR mapping methods (PIN-SLAM, Splat-LOAM, Voxblox, N3-Mapping) on the Newer College and Oxford Spires datasets
 
 **Leader, Autonomous Driving Team** · HEVEN Club, Sungkyunkwan University · 2024 – 2025
 
 - Designed and implemented full-stack autonomous vehicle system (perception, planning, control) in ROS, C++, and Python
+- Enhanced localization accuracy from 5 m to 2 cm by implementing RTK GNSS and NTRIP correction
 - Led team to 1st Place (2024) and 3rd Place (2025) at the national Autonomous Driving Robot Race
 
 </section>
@@ -95,10 +109,10 @@ B.Eng. in Mechanical Engineering & Computer Science and Engineering · GPA: 4.41
 
 ## Teaching & Service
 
-- **Teaching Assistant**, C Programming, SKKU
+- **Teaching Assistant**, C Programming, SKKU (2026)
 - **Instructor**, Republic of Korea Air Force MAICON Military AI Contest (2025) - trained officers and cadets on autonomous driving systems
-- **Exhibitor**, SOLiDVUE at CES 2025 - demonstrated LiDAR sensor technology
-- **SG Maple** (Global Mentoring & Assisting Exchange Students), SKKU
-- **Interpreter**, Army Military Research Institute (2022–2024)
+- **Exhibitor**, SOLiDVUE at CES 2025 - presented the LiDAR sensor's technical details to industry and public visitors
+- **SG Maple** (Global Mentoring & Assisting International Exchange Students), SKKU (2025)
+- **Interpreter**, Army Military Research Institute (2022–2024) - military service
 
 </section>
